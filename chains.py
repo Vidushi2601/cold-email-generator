@@ -9,7 +9,11 @@ load_dotenv()
 
 class Chain:
     def __init__(self):
-        self.llm = ChatGroq(temperature=0, groq_api_key=os.getenv("GROQ_API_KEY"), model_name="llama-3.1-8b-instant")
+        self.llm = ChatGroq(
+            temperature=0,
+            api_key=os.getenv("GROQ_API_KEY"),
+            model="llama-3.3-70b-versatile"
+        )
 
     def extract_jobs(self, cleaned_text):
         prompt_extract = PromptTemplate.from_template(
@@ -39,15 +43,15 @@ class Chain:
             {job_description}
 
             ### INSTRUCTION:
-            You are a skilled professional with expertise in Machine Learning, Data Science, and Python and c++.You are also well versed in c++ and sql and have a strong hold of data structures and algorithms. You have a background in developing projects like a movie recommender system using cosine similarity and a customer segmentation model with K-Means clustering.
-    Your job is to write a cold email to the client regarding the job mentioned above, describing your capability in fulfilling their needs.
-    
-    Also, add the most relevant ones from the following links to showcase your portfolio: {link_list}
-    
-    Remember you are writing as yourself, Vidushi, with a strong background in Machine Learning and Python and c++.
-    Do not provide a preamble.
+            You are a skilled professional with expertise in Machine Learning, Data Science, and Python and C++. You are also well versed in SQL and have a strong hold of data structures and algorithms. You have a background in developing projects like a movie recommender system using cosine similarity and a customer segmentation model with K-Means clustering.
+            
+            Your job is to write a cold email to the client regarding the job mentioned above, describing your capability in fulfilling their needs.
+            
+            Also, add the most relevant ones from the following links to showcase your portfolio: {link_list}
+            
+            Remember you are writing as yourself, Vidushi, with a strong background in Machine Learning and Python and C++.
+            Do not provide a preamble.
             ### EMAIL (NO PREAMBLE):
-
             """
         )
         chain_email = prompt_email | self.llm
@@ -55,4 +59,4 @@ class Chain:
         return res.content
 
 if __name__ == "__main__":
-    print(os.getenv("GROQ_API_KEY"))
+    print("API Key Loaded:", os.getenv("GROQ_API_KEY") is not None)
