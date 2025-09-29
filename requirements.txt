@@ -1,0 +1,9 @@
+streamlit
+langchain==0.3.0
+langchain-community==0.3.0
+chromadb
+pandas
+requests
+beautifulsoup4
+groq
+openai
