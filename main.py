@@ -17,7 +17,7 @@ def create_streamlit_app(llm, portfolio, clean_text):
             loader = WebBaseLoader([url_input])
             data = clean_text(loader.load().pop().page_content)
             portfolio.load_portfolio()
-            llm=ChatGroq(api_key=os.environ['GROQ_API_KEY])
+            llm=ChatGroq(api_key=os.environ['GROQ_API_KEY'])
                          chain=Chain(llm=llm)
             jobs = llm.extract_jobs(data)
             for job in jobs:
@@ -49,4 +49,5 @@ if __name__ == "__main__":
     st.set_page_config(layout="wide", page_title="Cold Email Generator", page_icon="📧")
 
     create_streamlit_app(chain, portfolio, clean_text)
+
 
