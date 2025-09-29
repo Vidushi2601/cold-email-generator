@@ -1,11 +1,5 @@
 import os
-import pandas as pd
-class Portfolio:
-    def __init__(self):
-        BASE_DIR=os.path.dirname(__file__)
-        file_path=os.path.join(BASE_DIR,"techstack_portfolio.csv")
-        self.data=pd.read_csv(file_path)
-    
+
 import streamlit as st
 from langchain_community.document_loaders import WebBaseLoader
 
@@ -56,6 +50,7 @@ if __name__ == "__main__":
     st.set_page_config(layout="wide", page_title="Cold Email Generator", page_icon="📧")
 
     create_streamlit_app(chain, portfolio, clean_text)
+
 
 
 
